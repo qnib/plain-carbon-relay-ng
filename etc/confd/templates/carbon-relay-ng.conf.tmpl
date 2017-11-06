@@ -1,8 +1,7 @@
 ## Global settings ##
 
 # supported variables:
-#  ${HOST} : hostname
-instance = "${HOST}"
+instance = "{{getenv "HOSTNAME"}}"
 max_procs = {{getenv "CARBON_RELAY_MAX_PROCS"}}
 
 admin_addr = "{{getenv "CARBON_RELAY_ADMIN_BIND_IP"}}:{{getenv "CARBON_RELAY_ADMIN_PORT"}}"

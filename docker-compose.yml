@@ -17,16 +17,19 @@ services:
     environment:
      - INFLUXDB_HOST=tasks.backend
   frontend:
-    image: ${FRONTEND_IMG:-qnib/plain-grafana4:4.5.2@sha256:2576e82a6300be760d82e941202afbab9bb7531b6bd9e115d150864c5daf93a3}
+    image: ${FRONTEND_IMG:-qnib/plain-grafana4:4.6.1@sha256:cc079b681c73c23c60c8a5b2416e0a61c2c07f3d530837aa8ed98f03ae19bd9c}
     ports:
      - 3000:3000
     environment:
+     - INFLUXDB_DB=graphite
      - INFLUXDB_HOST=tasks.backend
   relay:
-    image: qnib/plain-carbon-relay-ng
+    image: qnib/plain-carbon-relay-ng:2017-11-06.v2
+    hostname: "{{.Service.Name}}.{{.Task.Slot}}"
     ports:
      - 2003:2003
      - 2004:2004
      - 8081:8081
     environment:
      - CARBON_RELAY_DESTINATION=tasks.backend:2003
+     - CARBON_RELAY_INTERNAL_METRICS_TARGET=tasks.backend:2003
