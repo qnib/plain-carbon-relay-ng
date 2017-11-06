@@ -1,7 +1,7 @@
 # plain-carbon-relay-ng
 Plain image holding carbon-relay-ng
 
-**Version**: v1
+**Version**: v2
 
 ## Fire up
 
